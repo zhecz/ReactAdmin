@@ -3,13 +3,47 @@ import './index.less'
 import { Link } from 'react-router-dom';
 import logo from '../../assets/images/logo.png'
 import { Menu } from 'antd';
-//import menuList from '../../config/menuConfig';
-//import wrapIcon from '../../utils/wrapIcon';
+import menuList from '../../config/menuConfig';
+import wrapIcon from '../../utils/wrapIcon';
 //import withRouter from '../../utils/withRouter';
 import storageUtils from '../../utils/storageUtils'
 const { SubMenu } = Menu;
 
 class LeftNav extends Component {
+
+
+    getMenuNodes_map = (menuList) => {
+        return menuList.map(item => {
+         
+          if(!item.children) {
+            return (
+              <Menu.Item key={item.key}>
+                <Link to={item.key}>
+                  <span>{item.title}</span>
+                </Link>
+              </Menu.Item>
+            )
+          } else {
+            return (
+              <SubMenu key={item.key} 
+                title={
+                  <span>
+                  <span>{item.title}</span>
+                </span>
+                }
+              >
+                {this.getMenuNodes_map(item.children)}
+              </SubMenu>
+            )
+          }
+    
+        })
+      }
+
+
+
+  
+    
   
     render() {
        
@@ -19,9 +53,9 @@ class LeftNav extends Component {
                     <img src={logo} alt="" />
                     <h1>烧烤摊</h1>
                 </Link>
-                <div className='left-nav-menu'>
+               
                    <Menu mode ="inline" theme="dark">
-                    <Menu.Item key="/home">
+                 {/*    <Menu.Item key="/home">
                         <Link to='/home'>
                         <span>首页</span>
                         </Link>
@@ -60,12 +94,17 @@ class LeftNav extends Component {
                         <span>角色管理</span>
                         </Link>
                        
-                    </Menu.Item>
+                    </Menu.Item> */}
 
-                   </Menu>
+
+                    {this.getMenuNodes_map(menuList)}
+
+                   </Menu> 
+
+        
+            
                 </div>
 
-            </div>
         )
     }
 }
