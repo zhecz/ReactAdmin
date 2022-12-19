@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './index.less'
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import logo from '../../assets/images/logo.png'
 import { Menu } from 'antd';
 import menuList from '../../config/menuConfig';
@@ -74,6 +74,9 @@ class LeftNav extends Component {
     
   
     render() {
+
+        // 得到当前请求的路由路径
+        let path = this.props.location.pathname
        
         return (
             <div className='left-nav'>
@@ -82,9 +85,12 @@ class LeftNav extends Component {
                     <h1>烧烤摊</h1>
                 </Link>
                
-                   <Menu mode ="inline" theme="dark">
+                   <Menu mode ="inline" 
+                   theme="dark"
+                   selectedKeys={[path]}
+                   >
                 
-                    {this.getMenuNodes(menuList)}
+                    {this.getMenuNodes_map(menuList)}
 
                    </Menu> 
 
@@ -95,4 +101,4 @@ class LeftNav extends Component {
         )
     }
 }
-export default LeftNav
+export default withRouter(LeftNav)
