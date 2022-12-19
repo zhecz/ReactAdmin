@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { Modal, Button } from 'antd';
+import {withRouter} from 'react-router-dom'
 import { ExclamationCircleOutlined } from '@ant-design/icons';
 import { formateDate } from '../../utils/dateUtils'
 import memoryUtils from '../../utils/memoryUtils'
+import menuList from '../../config/menuConfig'
 import { reqWeatherQuery } from '../../api'
 import storageUtils from '../../utils/storageUtils'
 
@@ -26,6 +28,26 @@ class Header extends Component {
     }, 1000)
   }
 
+  getTitle = () => {
+    // 得到当前请求路径
+    const path = this.props.location.pathname
+    let title
+    menuList.forEach(item => {
+      if (item.key===path) { // 如果当前item对象的key与path一样,item的title就是需要显示的title
+        title = item.title
+      } else if (item.children) {
+        // 在所有子item中查找匹配的
+        const cItem = item.children.find(cItem => path.indexOf(cItem.key)===0)
+        // 如果有值才说明有匹配的
+        if(cItem) {
+          // 取出它的title
+          title = cItem.title
+        }
+      }
+    })
+    return title
+  }
+
   componentDidMount () {
     // 获取当前的时间
     this.getTime()
@@ -37,6 +59,8 @@ class Header extends Component {
     const {currentTime} = this.state
 
     const username = memoryUtils.user.username
+
+    const title = this.getTitle()
 
 
 
@@ -50,7 +74,7 @@ class Header extends Component {
        
       </div>
       <div className="header-bottom">
-        <div className="header-bottom-left">首页</div>
+        <div className="header-bottom-left">{title}</div>
         <div className="header-bottom-right">
         <span>{currentTime}</span>
           
@@ -61,4 +85,4 @@ class Header extends Component {
   }
 }
 
-export default Header
+export default withRouter(Header)
