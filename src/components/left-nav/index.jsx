@@ -21,8 +21,11 @@ class LeftNav extends Component {
                 </Link>
                 <div className='left-nav-menu'>
                    <Menu mode ="inline" theme="dark">
-                    <Menu.Item key="1">
+                    <Menu.Item key="/home">
+                        <Link to='/home'>
                         <span>首页</span>
+                        </Link>
+                       
                     </Menu.Item>
 
                     <SubMenu key="sub1" title={
@@ -30,14 +33,34 @@ class LeftNav extends Component {
                             <span>商品</span>
                         </span>
                     }>
-                         <Menu.Item key="1">
-                        <span>品类管理</span>
+                         <Menu.Item key="/category">
+                            <Link to='/category'>
+                            <span>品类管理</span>
+                            </Link>                        
+                        
                     </Menu.Item>
-                    <Menu.Item key="1">
+                    <Menu.Item key="/product">
+                        <Link to='/product'>
                         <span>商品管理</span>
+                        </Link>
+                       
                     </Menu.Item>
 
                     </SubMenu>
+
+                    <Menu.Item key="/user">
+                        <Link to='/user'>
+                        <span>用户管理</span>
+                        </Link>
+                       
+                    </Menu.Item>
+
+                    <Menu.Item key="/role">
+                        <Link to='/role'>
+                        <span>角色管理</span>
+                        </Link>
+                       
+                    </Menu.Item>
 
                    </Menu>
                 </div>
