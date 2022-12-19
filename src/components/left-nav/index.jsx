@@ -41,6 +41,34 @@ class LeftNav extends Component {
       }
 
 
+      getMenuNodes = (menuList)=>{
+        return menuList.reduce((prev, item)=>{
+            if(!item.children){
+                prev.push(( <Menu.Item key={item.key}>
+                    <Link to={item.key}>
+                      <span>{item.title}</span>
+                    </Link>
+                  </Menu.Item>)
+                   
+                )
+            }else {
+                prev.push((
+                    <SubMenu key={item.key} 
+                    title={
+                      <span>
+                      <span>{item.title}</span>
+                    </span>
+                    }
+                  >
+                    {this.getMenuNodes(item.children)}
+                  </SubMenu>
+                ))
+            }
+            return prev
+        }, [])
+      }
+
+
 
   
     
@@ -55,49 +83,8 @@ class LeftNav extends Component {
                 </Link>
                
                    <Menu mode ="inline" theme="dark">
-                 {/*    <Menu.Item key="/home">
-                        <Link to='/home'>
-                        <span>首页</span>
-                        </Link>
-                       
-                    </Menu.Item>
-
-                    <SubMenu key="sub1" title={
-                        <span>
-                            <span>商品</span>
-                        </span>
-                    }>
-                         <Menu.Item key="/category">
-                            <Link to='/category'>
-                            <span>品类管理</span>
-                            </Link>                        
-                        
-                    </Menu.Item>
-                    <Menu.Item key="/product">
-                        <Link to='/product'>
-                        <span>商品管理</span>
-                        </Link>
-                       
-                    </Menu.Item>
-
-                    </SubMenu>
-
-                    <Menu.Item key="/user">
-                        <Link to='/user'>
-                        <span>用户管理</span>
-                        </Link>
-                       
-                    </Menu.Item>
-
-                    <Menu.Item key="/role">
-                        <Link to='/role'>
-                        <span>角色管理</span>
-                        </Link>
-                       
-                    </Menu.Item> */}
-
-
-                    {this.getMenuNodes_map(menuList)}
+                
+                    {this.getMenuNodes(menuList)}
 
                    </Menu> 
 
