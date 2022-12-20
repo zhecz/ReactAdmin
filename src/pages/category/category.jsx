@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Card, Button, Table, Modal, message } from 'antd'
+import { PlusOutlined, ArrowRightOutlined } from '@ant-design/icons'
 import LinkButton from '../../components/link-button';
 import {reqCategorys, reqUpdateCategory, reqAddCategory} from '../../api'
 
@@ -85,6 +86,16 @@ export default class Category extends Component {
     })
   }
 
+  showCategorys = ()=>{
+    this.setState(
+      {
+        parentId:'0',
+        parentName: '',
+        subCategorys: []
+      }
+    )
+  }
+
 
 
   /*
@@ -111,7 +122,13 @@ export default class Category extends Component {
     // 读取状态数据
     const {categorys, subCategorys, parentId, parentName, loading} = this.state
 
-    const title = '一级分类列表'
+    const title = parentId === '0' ? '一级分类列表' : (
+      <span>
+        <Button type='link' onClick={this.showCategorys}>一级分类列表</Button>
+        <ArrowRightOutlined />&nbsp;
+        <span>{parentName}</span>
+      </span>
+    )
     const extra = (
       <Button type='primary'> 添加</Button>
     )
