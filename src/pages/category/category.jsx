@@ -43,11 +43,12 @@ export default class Category extends Component {
   异步获取一级/二级分类列表显示
   parentId: 如果没有指定根据状态中的parentId请求, 如果指定了根据指定的请求
    */
-  getCategorys = async (parentId) => {
+  getCategorys = async () => {
 
     // 在发请求前, 显示loading
     this.setState({loading: true})
-    parentId = parentId || this.state.parentId
+    //parentId = parentId || this.state.parentId
+    const {parentId} = this.state
     
     // 发异步ajax请求, 获取数据
     const result = await reqCategorys(parentId)
