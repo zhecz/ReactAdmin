@@ -109,7 +109,8 @@ export default class Category extends Component {
     // 获取数据
     const {parentId,categoryName} = this.form.current.getFieldsValue()
     // 清除输入数据
-    this.form.current.resetFields()
+    //this.form.current.resetFields()
+    this.form.resetFields()
     // 判断一级分类还是二级分类;这里不用判断后端会根据传递的parentId值分辨是父分类还是子分类
     const result = await reqAddCategory(categoryName, parentId)
         if(result.status===0) {
@@ -125,7 +126,7 @@ export default class Category extends Component {
   }
 
 
-  
+
 
   updateCategory = async ()=>{
      // 准备数据
