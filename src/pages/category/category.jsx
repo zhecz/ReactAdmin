@@ -12,7 +12,7 @@ export default class Category extends Component {
     subCategorys: [], // 二级分类列表
     parentId: '0', // 当前需要显示的分类列表的父分类ID
     parentName: '', // 当前需要显示的分类列表的父分类名称
-   // showStatus: 0, // 标识添加/更新的确认框是否显示, 0: 都不显示, 1: 显示添加, 2: 显示更新 
+    showStatus: 0, // 标识添加/更新的确认框是否显示, 0: 都不显示, 1: 显示添加, 2: 显示更新 
   }
 
  /*
@@ -29,7 +29,7 @@ export default class Category extends Component {
         width: 300,
         render: (category) => ( // 返回需要显示的界面标签
           <span>
-            <LinkButton>修改分类</LinkButton>
+            <LinkButton onClick={() => this.showUpdate(category)}>修改分类</LinkButton>
            
             {this.state.parentId==='0' ? <LinkButton onClick={() => this.showSubCategorys(category)}>查看子分类</LinkButton> : null}
 
@@ -97,6 +97,47 @@ export default class Category extends Component {
   }
 
 
+  addCategory = ()=>{
+    this.setState({
+      showStatus: 0
+    })
+  }
+
+  updateCategory = ()=>{
+    this.setState({
+      showStatus:0
+    })
+  }
+
+  handleCancel = () => {
+    this.setState({
+      showStatus: 0
+    })
+  }
+
+
+  /*
+  显示添加的确认框
+   */
+  showAdd = () => {
+    this.setState({
+      showStatus: 1
+    })
+  }
+
+  /*
+  显示修改的确认框
+   */
+  showUpdate = (category) => {
+    // 保存分类对象
+    //this.category = category
+    // 更新状态
+    this.setState({
+      showStatus: 2
+    })
+  }
+
+
 
   /*
   为第一次render()准备数据
@@ -120,7 +161,7 @@ export default class Category extends Component {
   render() {
 
     // 读取状态数据
-    const {categorys, subCategorys, parentId, parentName, loading} = this.state
+    const {categorys, subCategorys, parentId, parentName, loading, showStatus} = this.state
 
     const title = parentId === '0' ? '一级分类列表' : (
       <span>
@@ -130,7 +171,7 @@ export default class Category extends Component {
       </span>
     )
     const extra = (
-      <Button type='primary'> 添加</Button>
+      <Button type='primary' onClick={this.showAdd}> 添加</Button>
     )
 
     
@@ -145,9 +186,33 @@ export default class Category extends Component {
        columns={this.columns}
        pagination={{defaultPageSize: 5, showQuickJumper: true}}
      
-      rowKey='_id' // 设置key值,不然会报错
-      bordered
+       rowKey='_id' // 设置key值,不然会报错
+       bordered
       />
+        <Modal
+          title="添加分类"
+          visible={showStatus===1}
+          onOk={this.addCategory}
+          onCancel={this.handleCancel}
+        >
+         {/*  <AddForm
+            categorys={categorys}
+            parentId={parentId}
+            setForm={(form) => {this.form = form}}
+          /> */}
+        </Modal>
+
+        <Modal
+          title="更新分类"
+          visible={showStatus===2}
+          onOk={this.updateCategory}
+          onCancel={this.handleCancel}
+        >
+         {/*  <UpdateForm
+            categoryName={category.name}
+            setForm={(form) => {this.form = form}}
+          /> */}
+        </Modal>
     </Card>
     )
   }
