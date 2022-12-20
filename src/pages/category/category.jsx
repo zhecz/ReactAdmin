@@ -4,6 +4,8 @@ import { PlusOutlined, ArrowRightOutlined } from '@ant-design/icons'
 import LinkButton from '../../components/link-button';
 import {reqCategorys, reqUpdateCategory, reqAddCategory} from '../../api'
 
+import AddForm from './add-form'
+
 export default class Category extends Component {
 
   state = {
@@ -195,6 +197,7 @@ export default class Category extends Component {
           onOk={this.addCategory}
           onCancel={this.handleCancel}
         >
+          <AddForm/>
          {/*  <AddForm
             categorys={categorys}
             parentId={parentId}
