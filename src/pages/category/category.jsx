@@ -108,7 +108,7 @@ export default class Category extends Component {
   render() {
 
     // 读取状态数据
-    const {categorys, loading} = this.state
+    const {categorys, subCategorys, parentId, parentName, loading} = this.state
 
     const title = '一级分类列表'
     const extra = (
@@ -123,7 +123,7 @@ export default class Category extends Component {
       <Card title={title} extra={extra}>
       <Table
        loading={loading}
-       dataSource={categorys}
+       dataSource={parentId==='0' ? categorys : subCategorys}
        columns={this.columns}
        pagination={{defaultPageSize: 5, showQuickJumper: true}}
      
