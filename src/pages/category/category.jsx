@@ -100,11 +100,32 @@ export default class Category extends Component {
   }
 
 
-  addCategory = ()=>{
+  addCategory = async ()=>{
     this.setState({
       showStatus: 0
     })
+
+    console.log('添加', this.form.current.getFieldsValue())
+    // 获取数据
+    const {parentId,categoryName} = this.form.current.getFieldsValue()
+    // 清除输入数据
+    this.form.current.resetFields()
+    // 判断一级分类还是二级分类;这里不用判断后端会根据传递的parentId值分辨是父分类还是子分类
+    const result = await reqAddCategory(categoryName, parentId)
+        if(result.status===0) {
+
+          // 添加的分类就是当前分类列表下的分类
+          if(parentId===this.state.parentId) {
+            // 重新获取当前分类列表显示
+            this.getCategorys()
+          } else if (parentId==='0'){ // 在二级分类列表下添加一级分类, 重新获取一级分类列表, 但不需要显示一级列表
+            this.getCategorys('0')
+          }
+        }
   }
+
+
+  
 
   updateCategory = async ()=>{
      // 准备数据
@@ -113,10 +134,10 @@ export default class Category extends Component {
       // 准备数据
       const categoryId = this.category._id
        // 清除输入数据
-       this.form.current.resetFields()
+      this.form.current.resetFields()
 
        // 2. 发请求更新分类
-       const result = await reqUpdateCategory({categoryId, categoryName})
+      const result = await reqUpdateCategory({categoryId, categoryName})
        if (result.status===0) {
          // 3. 重新显示列表
          this.getCategorys()
@@ -215,12 +236,12 @@ export default class Category extends Component {
           onOk={this.addCategory}
           onCancel={this.handleCancel}
         >
-          <AddForm/>
-         {/*  <AddForm
+          
+          <AddForm
             categorys={categorys}
             parentId={parentId}
             setForm={(form) => {this.form = form}}
-          /> */}
+          />
         </Modal>
 
         <Modal

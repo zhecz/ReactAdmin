@@ -13,11 +13,11 @@ export default class UpdateForm extends Component {
 
 
   render() {
-    const {category_name} = this.props
+    const {categoryName} = this.props
     return (
         <Form
         ref={this.myForm}
-        initialValues={{categoryName:category_name}}
+        initialValues={{categoryName:categoryName}}
         >
         <Form.Item
         name='categoryName'

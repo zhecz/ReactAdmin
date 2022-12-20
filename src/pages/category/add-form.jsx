@@ -2,18 +2,20 @@ import React, { Component } from 'react'
 import { Form, Input, Select } from 'antd'
 const { Option } = Select
 export default class AddForm extends Component {
- /*  myForm = React.createRef()
-  UNSAFE_componentWillMount() {
-    this.props.addform(this.myForm)
+
+  myForm = React.createRef()
+
+  componentWillMount() {
+    this.props.setForm(this.myForm)
   }
   componentDidMount(){
     this.myForm.current.setFieldsValue({parentId:this.props.parentId})
-  } */
+  }
   render() {
     const { categorys, parentId } = this.props
     return (
       <Form
-        //ref={this.myForm}
+        ref={this.myForm}
         initialValues={
           { parentId }
         }>
@@ -29,11 +31,11 @@ export default class AddForm extends Component {
           <Select
           >
             <Option value="0">一级分类</Option>
-          {/*   {
+            {
               categorys.map(category => {
                 return <Option key={category._id} value={category._id}>{category.name}</Option>
               })
-            } */}
+            }
           </Select>
         </Form.Item>
         <Form.Item
