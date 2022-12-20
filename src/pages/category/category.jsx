@@ -5,6 +5,7 @@ import LinkButton from '../../components/link-button';
 import {reqCategorys, reqUpdateCategory, reqAddCategory} from '../../api'
 
 import AddForm from './add-form'
+import UpdateForm from './update-form'
 
 export default class Category extends Component {
 
@@ -105,10 +106,24 @@ export default class Category extends Component {
     })
   }
 
-  updateCategory = ()=>{
-    this.setState({
-      showStatus:0
-    })
+  updateCategory = async ()=>{
+     // 准备数据
+     const categoryName = this.form.current.getFieldValue('categoryName')
+     console.log(this.category._id,categoryName)
+      // 准备数据
+      const categoryId = this.category._id
+       // 清除输入数据
+       this.form.current.resetFields()
+
+       // 2. 发请求更新分类
+       const result = await reqUpdateCategory({categoryId, categoryName})
+       if (result.status===0) {
+         // 3. 重新显示列表
+         this.getCategorys()
+       }
+     else{
+       console.log(result.msg)
+     }
   }
 
   handleCancel = () => {
@@ -132,7 +147,7 @@ export default class Category extends Component {
    */
   showUpdate = (category) => {
     // 保存分类对象
-    //this.category = category
+    this.category = category
     // 更新状态
     this.setState({
       showStatus: 2
@@ -164,6 +179,9 @@ export default class Category extends Component {
 
     // 读取状态数据
     const {categorys, subCategorys, parentId, parentName, loading, showStatus} = this.state
+
+    // 读取指定的分类
+    const category = this.category || {} // 如果还没有指定一个空对象
 
     const title = parentId === '0' ? '一级分类列表' : (
       <span>
@@ -211,10 +229,11 @@ export default class Category extends Component {
           onOk={this.updateCategory}
           onCancel={this.handleCancel}
         >
-         {/*  <UpdateForm
+
+          <UpdateForm
             categoryName={category.name}
             setForm={(form) => {this.form = form}}
-          /> */}
+          />
         </Modal>
     </Card>
     )
