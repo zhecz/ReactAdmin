@@ -90,11 +90,11 @@ export default class ProductHome extends Component {
     const {searchName, searchType} = this.state
     // 如果搜索关键字有值, 说明我们要做搜索分页
     let result
-   /*  if (searchName) {
+    if (searchName) {
       result = await reqSearchProducts({pageNum, pageSize: PAGE_SIZE, searchName, searchType})
-    } else { // 一般分页请求 */
+    } else { // 一般分页请求
       result = await reqProducts(pageNum, PAGE_SIZE)
-    //}
+    }
 
     this.setState({loading: false}) // 隐藏loading
     if (result.status === 0) {
@@ -154,7 +154,7 @@ export default class ProductHome extends Component {
             value={searchName}
             onChange={event => this.setState({searchName:event.target.value})}
           />
-          <Button type='primary' /* onClick={() => this.getProducts(1)} */>搜索</Button>
+          <Button type='primary' onClick={() => this.getProducts(1)}>搜索</Button>
         </span>
       )
   
