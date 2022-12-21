@@ -9,6 +9,8 @@ import {
   } from 'antd'
   import { PlusOutlined } from '@ant-design/icons'
   import LinkButton from '../../components/link-button'
+  import {reqProducts, reqSearchProducts, reqUpdateStatus} from '../../api'
+  import {PAGE_SIZE} from '../../utils/constants'
 
   const Option = Select.Option
   
@@ -17,37 +19,9 @@ export default class ProductHome extends Component {
 
     state = {
         total: 0, // 商品的总数量
-        products: [ {
-            "status": 2,
-            "imgs": [
-                "1578588737108-index.jpg"
-            ],
-            "_id": "5e12b97de31bb727e4b0e349",
-            "name": "联想ThinkPad 翼4809",
-            "desc": "年度重量级新品，X390、T490全新登场 更加轻薄机身设计9",
-            "price": 6300,
-            "pCategoryId": "5e12b8bce31bb727e4b0e348",
-            "categoryId": "5fc74b650dd9b10798413162",
-            "detail": "<p><span style=\"color: rgb(228,57,60);background-color: rgb(255,255,255);font-size: 12px;\">想你所需，超你所想！精致外观，轻薄便携带光驱，内置正版office杜绝盗版死机，全国联保两年！</span></p>\n<p><span style=\"color: rgb(102,102,102);background-color: rgb(255,255,255);font-size: 16px;\">联想（Lenovo）扬天V110 15.6英寸家用轻薄便携商务办公手提笔记本电脑 定制【E2-9010/4G/128G固态】 2G独显 内置</span></p>\n<p><span style=\"color: rgb(102,102,102);background-color: rgb(255,255,255);font-size: 16px;\"></span></p>\n",
-            "__v": 0
-        },
-        {
-            "status": 1,
-            "imgs": [
-                "image-1559402448049.jpg",
-                "image-1559402450480.jpg"
-            ],
-            "_id": "5e12b9d1e31bb727e4b0e34a",
-            "name": "华硕(ASUS) 飞行堡垒",
-            "desc": "15.6英寸窄边框游戏笔记本电脑(i7-8750H 8G 256GSSD+1T GTX1050Ti 4G IPS)",
-            "price": 6799,
-            "pCategoryId": "5e12b8bce31bb727e4b0e348",
-            "categoryId": "5fc74b650dd9b10798413162",
-            "detail": "<p><span style=\"color: rgb(102,102,102);background-color: rgb(255,255,255);font-size: 16px;\">华硕(ASUS) 飞行堡垒6 15.6英寸窄边框游戏笔记本电脑(i7-8750H 8G 256GSSD+1T GTX1050Ti 4G IPS)火陨红黑</span> </p>\n<p><span style=\"color: rgb(228,57,60);background-color: rgb(255,255,255);font-size: 12px;\">【4.6-4.7号华硕集体放价，大牌够品质！】1T+256G高速存储组合！超窄边框视野无阻，强劲散热一键启动！</span> </p>\n",
-            "__v": 0
-        }], // 商品的数组
-       /*  loading: false, // 是否正在加载中
-        searchName: '', // 搜索的关键字
+        products: [], // 商品的数组
+        loading: false, // 是否正在加载中
+         /* searchName: '', // 搜索的关键字
         searchType: 'productName', // 根据哪个字段搜索 */
       }
 
@@ -106,12 +80,49 @@ export default class ProductHome extends Component {
   }
 
 
+  /*
+  获取指定页码的列表数据显示
+   */
+  getProducts = async (pageNum) => {
+    this.pageNum = pageNum // 保存pageNum, 让其它方法可以看到
+    this.setState({loading: true}) // 显示loading
+
+    const {searchName, searchType} = this.state
+    // 如果搜索关键字有值, 说明我们要做搜索分页
+    let result
+   /*  if (searchName) {
+      result = await reqSearchProducts({pageNum, pageSize: PAGE_SIZE, searchName, searchType})
+    } else { // 一般分页请求 */
+      result = await reqProducts(pageNum, PAGE_SIZE)
+    //}
+
+    this.setState({loading: false}) // 隐藏loading
+    if (result.status === 0) {
+      // 取出分页数据, 更新状态, 显示分页列表
+      const {total, list} = result.data
+      this.setState({
+        total,
+        products: list
+      })
+    }
+  }
+
+  onChange = (pageNumber) => {
+    console.log('Page: ', pageNumber);
+  };
+
+
 
 
 
   componentWillMount () {
     this.initColumns()
   }
+
+  componentDidMount () {
+    this.getProducts(1)
+  }
+
 
 
 
@@ -125,7 +136,7 @@ export default class ProductHome extends Component {
 
   render() {
 
-    const {products} = this.state
+    const {products, total} = this.state
 
     const title = (
         <span>
@@ -166,13 +177,13 @@ export default class ProductHome extends Component {
           //loading={loading}
           dataSource={products}
           columns={this.columns}
-         /*  pagination={{
+          pagination={{
             current: this.pageNum,
             total,
             defaultPageSize: PAGE_SIZE,
             showQuickJumper: true,
             onChange: this.getProducts
-          }} */
+          }}
         />
       </Card>
     )
