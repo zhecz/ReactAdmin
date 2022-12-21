@@ -97,6 +97,10 @@ class LeftNav extends Component {
 
         // 得到当前请求的路由路径
         let path = this.props.location.pathname
+        console.log('render()', path)
+        if(path.indexOf('/product')===0) { // 当前请求的是商品或其子路由界面
+          path = '/product'
+    }
 
          // 得到需要打开菜单项的key
         const openKey = this.openKey

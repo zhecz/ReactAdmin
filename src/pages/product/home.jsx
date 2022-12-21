@@ -125,15 +125,6 @@ export default class ProductHome extends Component {
 
 
 
-
-
-
-
-
-
-
-
-
   render() {
 
     const {products, total, searchType, searchName} = this.state
