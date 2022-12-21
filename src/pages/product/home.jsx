@@ -21,8 +21,8 @@ export default class ProductHome extends Component {
         total: 0, // 商品的总数量
         products: [], // 商品的数组
         loading: false, // 是否正在加载中
-         /* searchName: '', // 搜索的关键字
-        searchType: 'productName', // 根据哪个字段搜索 */
+        searchName: '', // 搜索的关键字
+        searchType: 'productName', // 根据哪个字段搜索
       }
 
      /*
@@ -136,14 +136,14 @@ export default class ProductHome extends Component {
 
   render() {
 
-    const {products, total} = this.state
+    const {products, total, searchType, searchName} = this.state
 
     const title = (
         <span>
           <Select
-          /*   value= {searchType} */
+            value= {searchType} 
             style={{width: 150}}
-           /*  onChange={value => this.setState({searchType:value})} */
+            onChange={value => this.setState({searchType:value})}
           >
             <Option value='productName'>按名称搜索</Option>
             <Option value='productDesc'>按描述搜索</Option>
@@ -151,8 +151,8 @@ export default class ProductHome extends Component {
           <Input
             placeholder='关键字'
             style={{width: 150, margin: '0 15px'}}
-           /*  value={searchName} */
-           /*  onChange={event => this.setState({searchName:event.target.value})} */
+            value={searchName}
+            onChange={event => this.setState({searchName:event.target.value})}
           />
           <Button type='primary' /* onClick={() => this.getProducts(1)} */>搜索</Button>
         </span>
