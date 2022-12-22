@@ -23,7 +23,7 @@ export default class ProductAddUpdate extends Component {
     options: [],
   }
 
-  initOptions = (categorys) => {
+  initOptions = async (categorys) => {
     // 根据categorys生成options数组
     const options = categorys.map(c => ({
       value: c._id,
@@ -31,11 +31,11 @@ export default class ProductAddUpdate extends Component {
       isLeaf: false, // 不是叶子
     }))
 
-    this.setState({
+   /*  this.setState({
       options
-    })
+    }) */
 
-   /*  // 如果是一个二级分类商品的更新
+     // 如果是一个二级分类商品的更新
     const {isUpdate, product} = this
     const {pCategoryId} = product
     if(isUpdate && pCategoryId!=='0') {
@@ -49,18 +49,18 @@ export default class ProductAddUpdate extends Component {
       }))
 
       // 找到当前商品对应的一级option对象
-      const targetOption = options.find(option => option.value===pCategoryId) */
+      const targetOption = options.find(option => option.value===pCategoryId) 
 
       // 关联对应的一级option上
-      //targetOption.children = childOptions
+      targetOption.children = childOptions
     }
 
 
-   /*  // 更新options状态
+    // 更新options状态
     this.setState({
       options
-    }) */
-  //}
+    })
+  }
 
 
   /*
@@ -107,7 +107,7 @@ export default class ProductAddUpdate extends Component {
     // 隐藏loading
     targetOption.loading = false
     // 二级分类数组有数据
-    /* if (subCategorys && subCategorys.length>0) { */
+    if (subCategorys && subCategorys.length>0) {
       // 生成一个二级列表的options
       const childOptions = subCategorys.map(c => ({
         value: c._id,
@@ -116,9 +116,9 @@ export default class ProductAddUpdate extends Component {
       }))
       // 关联到当前option上
       targetOption.children = childOptions
-   /*  } else { // 当前选中的分类没有二级分类
+    } else { // 当前选中的分类没有二级分类
       targetOption.isLeaf = true
-    } */
+    }
 
     // 更新options状态
     this.setState({
@@ -132,6 +132,8 @@ export default class ProductAddUpdate extends Component {
  addUpdateForm = React.createRef()
  pw = React.createRef() //接收图片的ref
  editor = React.createRef() //富文本的ref
+
+
  // 提交更新或者修改
  submit = async()=>{
    let values
@@ -185,6 +187,15 @@ export default class ProductAddUpdate extends Component {
     this.getCategorys('0')
   }
 
+  componentWillMount () {
+    // 取出携带的state
+    const product = this.props.location.state  // 如果是添加没值, 否则有值
+    // 保存是否是更新的标识
+    this.isUpdate = !!product
+    // 保存商品(如果没有, 保存是{})
+    this.product = product || {}
+  }
+
 
 
 
@@ -196,17 +207,23 @@ export default class ProductAddUpdate extends Component {
       wrapperCol: { span: 8 }, // 右侧包裹的宽度
     }
 
-   /*  // 获取商品数据
-    const {name,desc,price,pCategoryId,categoryId,imgs,detail} = this.products
+    const {isUpdate, product} = this
+    const {pCategoryId, categoryId, imgs, detail} = product
+
     // 用来接收级联分类ID的数组
     const categoryIds = []
-    if(pCategoryId==='0'){
-      categoryIds.push(categoryId)
-    }else{
-      categoryIds.push(pCategoryId)
-      categoryIds.push(categoryId)
-    } */
+    if(isUpdate) {
+      // 商品是一个一级分类的商品
+      if(pCategoryId==='0') {
+        categoryIds.push(categoryId)
+      } else {
+        // 商品是一个二级分类的商品
+        categoryIds.push(pCategoryId)
+        categoryIds.push(categoryId)
+      }
+    }
 
+ 
     return (
       <Card
       title={this.title}>
@@ -217,7 +234,7 @@ export default class ProductAddUpdate extends Component {
           <Form.Item
           label='商品名称'
           name='name'
-         /*  initialValue={name} */
+          initialValue={product.name}
           rules={[
             {
               required: true, message: '必须输入商品名称'
@@ -229,7 +246,7 @@ export default class ProductAddUpdate extends Component {
           <Form.Item
           label='商品描述'
           name='desc'
-         /*  initialValue={desc} */
+          initialValue={product.desc}
           rules={[
             {
               required: true, message: '必须输入商品描述'
@@ -244,7 +261,7 @@ export default class ProductAddUpdate extends Component {
           <Form.Item
           label='商品价格'
           name='price'
-         /*  initialValue={price} */
+          initialValue={product.price}
           rules={[
             {required: true, message: '必须输入商品价格'},
             {validator: this.validatePrice}
@@ -254,8 +271,8 @@ export default class ProductAddUpdate extends Component {
           </Form.Item>
           <Form.Item
           label='商品分类'
-         /*  name='categoryIds' */
-          /* initialValue={categoryIds} */
+          name='categoryIds'
+          initialValue={categoryIds}
           >
             <Cascader 
             options={this.state.options} 
@@ -275,7 +292,7 @@ export default class ProductAddUpdate extends Component {
          {/*  <RichTextEditor detail={detail} ref={this.editor}/> */}
           </Form.Item>
           <Form.Item>
-            <Button type='primary'/*  onClick={this.submit} */>提交</Button>
+            <Button type='primary' onClick={this.submit}>提交</Button>
           </Form.Item>
         </Form>
       </Card>
