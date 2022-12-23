@@ -9,8 +9,8 @@ import {
   message
 } from 'antd'
 
-//import PicturesWall from './pictures-wall'
-//import RichTextEditor from './rich-text-editor'
+import PicturesWall from './pictures-wall'
+import RichTextEditor from './rich-text-editor'
 import LinkButton from '../../components/link-button'
 import {reqCategorys, reqAddOrUpdateProduct} from '../../api'
 
@@ -286,10 +286,10 @@ export default class ProductAddUpdate extends Component {
             ></Cascader>
           </Form.Item>
           <Form.Item label='商品图片'>
-           {/*  <PictureWalls imgs={imgs} ref={this.pw}/> */}
+           { <PicturesWall imgs={imgs} ref={this.pw}/>}
           </Form.Item>
-          <Form.Item label="商品详情">
-         {/*  <RichTextEditor detail={detail} ref={this.editor}/> */}
+          <Form.Item label="商品详情" labelCol={{span: 2}} wrapperCol={{span: 20}}>
+         { <RichTextEditor detail={detail} ref={this.editor}/>}
           </Form.Item>
           <Form.Item>
             <Button type='primary' onClick={this.submit}>提交</Button>
