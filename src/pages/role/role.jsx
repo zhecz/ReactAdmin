@@ -130,6 +130,7 @@ export default class Role extends Component {
     })
 
     const role = this.state.role
+    
     // 得到最新的menus
     const menus = this.auth.current.getMenus()
     role.menus = menus

@@ -2,7 +2,9 @@ import React, { Component } from 'react'
 import { Form, Input } from 'antd'
 
 export default class AddForm extends Component {
+    
     myForm = React.createRef()
+
     componentDidMount() {
         this.props.setForm(this.myForm)
     }
