@@ -109,7 +109,7 @@ class LeftNav extends Component {
             <div className='left-nav'>
                 <Link to="/" className='left-nav-header'>
                     <img src={logo} alt="" />
-                    <h1>烧烤摊</h1>
+                    <h1>Management System</h1>
                 </Link>
                
                    <Menu mode ="inline" 

@@ -31,21 +31,21 @@ export default class ProductHome extends Component {
   initColumns = () => {
     this.columns = [
       {
-        title: '商品名称',
+        title: 'Product Name',
         dataIndex: 'name',
       },
       {
-        title: '商品描述',
+        title: 'Product Description',
         dataIndex: 'desc',
       },
       {
-        title: '价格',
+        title: 'Price',
         dataIndex: 'price',
         render: (price) => '$' + price  // 当前指定了对应的属性, 传入的是对应的属性值
       },
       {
         width: 100,
-        title: '状态',
+        title: 'Status',
         // dataIndex: 'status',
         render: (product) => {
           const {status, _id} = product
@@ -70,8 +70,8 @@ export default class ProductHome extends Component {
           return (
             <span>
               {/*将product对象使用state传递给目标路由组件*/}
-              <LinkButton onClick={() => this.props.history.push('/product/detail', {product})}>详情</LinkButton>
-              <LinkButton onClick={() => this.props.history.push('/product/addupdate', product)}>修改</LinkButton>
+              <LinkButton onClick={() => this.props.history.push('/product/detail', {product})}>Details</LinkButton>
+              <LinkButton onClick={() => this.props.history.push('/product/addupdate', product)}>Edit</LinkButton>
             </span>
           )
         }
@@ -147,23 +147,23 @@ export default class ProductHome extends Component {
             style={{width: 150}}
             onChange={value => this.setState({searchType:value})}
           >
-            <Option value='productName'>按名称搜索</Option>
-            <Option value='productDesc'>按描述搜索</Option>
+            <Option value='productName'>Search Name</Option>
+            <Option value='productDesc'>Search Discription</Option>
           </Select>
           <Input
-            placeholder='关键字'
+            placeholder='Key Word'
             style={{width: 150, margin: '0 15px'}}
             value={searchName}
             onChange={event => this.setState({searchName:event.target.value})}
           />
-          <Button type='primary' onClick={() => this.getProducts(1)}>搜索</Button>
+          <Button type='primary' onClick={() => this.getProducts(1)}>Search</Button>
         </span>
       )
   
       const extra = (
         <Button type='primary' onClick={() => this.props.history.push('/product/addupdate')}>
          <PlusOutlined />
-          添加商品
+          Add Product
         </Button>
       )
 

@@ -97,8 +97,8 @@ class Header extends Component {
       
       <div className="header">
       <div className="header-top">
-        <span>欢迎, {username}</span>
-        <LinkButton onClick={this.logout}>退出</LinkButton>
+        <span>Welcome, {username}</span>
+        <LinkButton onClick={this.logout}>Logout</LinkButton>
        
       </div>
       <div className="header-bottom">

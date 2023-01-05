@@ -55,10 +55,10 @@ export default class Login extends Component {
             <div className='login'>
                 <header className='login-header'>
                 <img src={logo} alt="logo"/>
-                <h1>React项目: 后台管理系统</h1>
+                <h1>ReactProject: Product Management System</h1>
                 </header>
                 <section className='login-content'>                
-                 <h2>用户登陆</h2>
+                 <h2>Log in</h2>
                  <Form ref={this.formRef} onFinish={this.onFinish}
                        name="basic"
                        labelCol={{

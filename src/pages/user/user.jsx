@@ -25,34 +25,34 @@ export default class User extends Component {
   initColumns = () => {
     this.columns = [
       {
-        title: '用户名',
+        title: 'User Name',
         dataIndex: 'username'
       },
       {
-        title: '邮箱',
+        title: 'Email',
         dataIndex: 'email'
       },
 
       {
-        title: '电话',
+        title: 'Phone',
         dataIndex: 'phone'
       },
       {
-        title: '注册时间',
+        title: 'Create Time',
         dataIndex: 'create_time',
         render: formateDate
       },
       {
-        title: '所属角色',
+        title: 'Role',
         dataIndex: 'role_id',
         render: (role_id) => this.roleNames[role_id]
       },
       {
-        title: '操作',
+        title: 'Operatons',
         render: (user) => (
           <span>
-            <LinkButton onClick={() => this.showUpdate(user)}>修改</LinkButton>
-            <LinkButton onClick={() => this.deleteUser(user)}>删除</LinkButton>
+            <LinkButton onClick={() => this.showUpdate(user)}>Edit</LinkButton>
+            <LinkButton onClick={() => this.deleteUser(user)}>Delete</LinkButton>
           </span>
         )
       },
@@ -155,7 +155,7 @@ export default class User extends Component {
     const {users, roles, isShow} = this.state
     const user = this.user || {}
 
-    const title = <Button type='primary' onClick={this.showAdd}>创建用户</Button>
+    const title = <Button type='primary' onClick={this.showAdd}>Create User</Button>
 
     return (
       <Card title={title}>

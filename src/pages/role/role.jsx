@@ -35,21 +35,21 @@ export default class Role extends Component {
   initColumn = () => {
     this.columns = [
       {
-        title: '角色名称',
+        title: 'Role Name',
         dataIndex: 'name'
       },
       {
-        title: '创建时间',
+        title: 'Create Time',
         dataIndex: 'create_time',
         render: (create_time) => formateDate(create_time)
       },
       {
-        title: '授权时间',
+        title: 'Authorization Time',
         dataIndex: 'auth_time',
         render: formateDate
       },
       {
-        title: '授权人',
+        title: 'Authorization Name',
         dataIndex: 'auth_name'
       },
     ]
@@ -171,8 +171,8 @@ export default class Role extends Component {
 
     const title = (
       <span>
-        <Button type='primary' onClick={() => this.setState({isShowAdd: true})}>创建角色</Button> &nbsp;&nbsp;
-        <Button type='primary' disabled={!role._id} onClick={() => this.setState({isShowAuth: true})}>设置角色权限</Button>
+        <Button type='primary' onClick={() => this.setState({isShowAdd: true})}>Create Role</Button> &nbsp;&nbsp;
+        <Button type='primary' disabled={!role._id} onClick={() => this.setState({isShowAuth: true})}>Set Authorizaton</Button>
       </span>
     )
 
@@ -198,7 +198,7 @@ export default class Role extends Component {
         />
 
         <Modal
-          title="添加角色"
+          title="Add Role"
           visible={isShowAdd}
           onOk={this.addRole}
           onCancel={() => {
@@ -212,7 +212,7 @@ export default class Role extends Component {
         </Modal>
 
         <Modal
-          title="设置角色权限"
+          title="Set Authorization"
           visible={isShowAuth}
           onOk={this.updateRole}
           onCancel={() => {

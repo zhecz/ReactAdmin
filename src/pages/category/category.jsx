@@ -24,17 +24,17 @@ export default class Category extends Component {
   initColumns = () => {
     this.columns = [
       {
-        title: '分类的名称',
+        title: 'Category Name',
         dataIndex: 'name', // 显示数据对应的属性名
       },
       {
-        title: '操作',
+        title: 'Operations',
         width: 300,
         render: (category) => ( // 返回需要显示的界面标签
           <span>
-            <LinkButton onClick={() => this.showUpdate(category)}>修改分类</LinkButton>
+            <LinkButton onClick={() => this.showUpdate(category)}>Edit Category</LinkButton>
            
-            {this.state.parentId==='0' ? <LinkButton onClick={() => this.showSubCategorys(category)}>查看子分类</LinkButton> : null}
+            {this.state.parentId==='0' ? <LinkButton onClick={() => this.showSubCategorys(category)}>See Next Level Category</LinkButton> : null}
 
 
           </span>
@@ -205,7 +205,7 @@ export default class Category extends Component {
     // 读取指定的分类
     const category = this.category || {} // 如果还没有指定一个空对象
 
-    const title = parentId === '0' ? '一级分类列表' : (
+    const title = parentId === '0' ? 'First Level Catogeries' : (
       <span>
         <Button type='link' onClick={this.showCategorys}>一级分类列表</Button>
         <ArrowRightOutlined />&nbsp;
@@ -213,7 +213,7 @@ export default class Category extends Component {
       </span>
     )
     const extra = (
-      <Button type='primary' onClick={this.showAdd}> 添加</Button>
+      <Button type='primary' onClick={this.showAdd}>Add</Button>
     )
 
     
@@ -232,7 +232,7 @@ export default class Category extends Component {
        bordered
       />
         <Modal
-          title="添加分类"
+          title="Add category"
           visible={showStatus===1}
           onOk={this.addCategory}
           onCancel={this.handleCancel}
@@ -246,7 +246,7 @@ export default class Category extends Component {
         </Modal>
 
         <Modal
-          title="更新分类"
+          title="Update category"
           visible={showStatus===2}
           onOk={this.updateCategory}
           onCancel={this.handleCancel}

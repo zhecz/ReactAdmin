@@ -83,7 +83,7 @@ export default class AuthForm extends PureComponent {
 
     return (
       <div>
-        <Item label='角色名称' {...formItemLayout}>
+        <Item label='Role Name' {...formItemLayout}>
           <Input value={role.name} disabled/>
         </Item>
 
@@ -93,7 +93,7 @@ export default class AuthForm extends PureComponent {
           checkedKeys={checkedKeys}
           onCheck={this.onCheck}
         >
-          <TreeNode title="平台权限" key="all">
+          <TreeNode title="Authorizaton" key="all">
             {this.treeNodes}
           </TreeNode>
         </Tree>

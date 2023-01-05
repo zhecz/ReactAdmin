@@ -1,70 +1,80 @@
-# Getting Started with Create React App
+# Product Management System 
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Overview:
 
-## Available Scripts
+The project is to develop an online shopping products management platform to support browsing, category and product management, user management, and user authorization management based on React.
 
-In the project directory, you can run:
+## Technologies:
 
-### `npm start`
+Project is created with:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+**Backend**
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Express
+- Node.js
+- Mongoose
 
-### `npm test`
+**Frontend**
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- ReactJS
+- Redux(Mange app state)
+- React-router (To handle routing)
+- Axios (For http requests)
+- AntD (Enterprise-level UI design language and React component library)
+- ES6
 
-### `npm run build`
+## Key Concepts:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- CRUD operations
+- Authenticaiton system
+- Encrpyting passwords
+- Integrated with AntD (React UI library)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Main Features:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+This app was made as the backend management system for various kinds of products. 
 
-### `npm run eject`
+Project methodology
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+- Register and login system
+  - Only a limited number of users can have access to this app, since it is designed as a backend management system for products.
+  - Admins can create any other users after logging into the system.
+  - Only after being created by admins, the users can login into the system.
+  - Validate all inputs in log in.
+  - Admins can create any other admins.
+  - Logout function.
+- Product category management
+  - Display the first level category list with pagination.
+  - Create new category item.
+  - Edit existing category item.
+  - Display the second level category list for one specific first level category item with pagination.
+  - Assign the second level category item to a different first level category item.
+- Product management
+  - Display the product list with pagination.
+  - Search for one specific product according to the product's name or product's description
+  - Create new product including uploading pictures using Antd upload component, and creating a text content for the product using react-draft-wysiwyg.
+  - Display the detail information for one product
+  - Edit the detail information for one product.
+  - Change the status for one product (stock or non-stock)
+- User management
+  - Admin users create other users.
+  - Edit user's information.
+  - Delete the user.
+- Authorization management (Role-based access control)
+  - Administrator creates other roles for users.
+  - Administrator assigns roles to different users to control who can access to what content and functionality of the app. 
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Routing Diagram:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+![image](https://github.com/zhecz/Pictures/blob/master/Routing_React.png)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Screenshots:
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
 
-### Code Splitting
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
-### Analyzing the Bundle Size
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
 
-### Making a Progressive Web App
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
