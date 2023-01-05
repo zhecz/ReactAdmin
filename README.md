@@ -72,23 +72,27 @@ Project methodology
 
 Login
 
-![image]()
+![image](https://github.com/zhecz/Pictures/blob/master/Login_React.PNG)
 
 Category Management
 
-![image]
+![image](https://github.com/zhecz/Pictures/blob/master/category_react.PNG)
 
 Product Management
 
-![image]
+![image](https://github.com/zhecz/Pictures/blob/master/Product_react.PNG)
 
 User Management
 
-![image]
+![image](https://github.com/zhecz/Pictures/blob/master/User_react.PNG)
 
 Role Management
 
+![image](https://github.com/zhecz/Pictures/blob/master/role_react.PNG)
+
 Set Authorization
+
+![image](https://github.com/zhecz/Pictures/blob/master/SetRole_react.PNG)
 
 
 
