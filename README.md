@@ -92,7 +92,7 @@ Role Management
 
 Set Authorization
 
-![image](https://github.com/zhecz/Pictures/blob/master/SetRole_react.PNG)
+![image](https://github.com/zhecz/Pictures/blob/master/SetRole01_react.PNG)
 
 
 
