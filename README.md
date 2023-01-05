@@ -66,7 +66,7 @@ Project methodology
 
 ## Routing Diagram:
 
-![image](https://github.com/zhecz/Pictures/blob/master/Routing_React.png)
+![image](https://github.com/zhecz/Pictures/blob/master/Routes_React.png)
 
 ## Screenshots:
 
